@@ -1,8 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
   const [notes, setNotes] = useState([])
   const [input, setInput] = useState("")
+
+  useEffect(() => {
+    const storedNotes = localStorage.getItem("notes")
+
+    if (storedNotes) {
+      setNotes(JSON.parse(storedNotes))
+    }
+  }, [])
 
   const addNote = () => {
     if (input.trim() === "") return
