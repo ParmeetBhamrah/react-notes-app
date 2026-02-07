@@ -23,8 +23,17 @@ function App() {
 
   const addNote = () => {
     if (input.trim() === "") return
-    setNotes([...notes, input])
+
+    const newNote = {
+      id: Date.now(),
+      text: input
+    }
+    setNotes([...notes, newNote])
     setInput("")
+  }
+
+  const deleteNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id))
   }
 
 return (
@@ -48,15 +57,23 @@ return (
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <ul className="space-y-3">
-            {notes.map((note, index) => (
-              <li key={index} className="p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-700">
-                {note}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {notes.length > 0 && (
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <ul className="space-y-3">
+              {notes.map((note) => (
+                <li key={note.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-700">
+                  <span>{note.text}</span>
+                  <button
+              onClick={() => deleteNote(note.id)}
+              className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            >
+              Delete
+            </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>  
     </div>
   )
