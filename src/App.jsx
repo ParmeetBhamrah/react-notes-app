@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 function App() {
   const [notes, setNotes] = useState([])
   const [input, setInput] = useState("")
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     const storedNotes = localStorage.getItem("notes")
@@ -10,11 +11,15 @@ function App() {
     if (storedNotes) {
       setNotes(JSON.parse(storedNotes))
     }
+
+    setIsLoaded(true)
   }, [])
 
   useEffect(() => {
+  if (!isLoaded) return
+
     localStorage.setItem("notes", JSON.stringify(notes))
-  }, [notes])
+  }, [notes, isLoaded])
 
   const addNote = () => {
     if (input.trim() === "") return
