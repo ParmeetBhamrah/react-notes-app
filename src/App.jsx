@@ -27,27 +27,37 @@ function App() {
     setInput("")
   }
 
-  return (
-    <div>
-      <h1>Notes</h1>
+return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Notes</h1>
 
-      <input  
-        value={input}
-        placeholder="Write a note..."
-        onChange= {(e) =>  {setInput(e.target.value)}}
-      />
+      <div className="grid gap-6 md:grid-cols-2 max-w-6xl mx-auto">
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <input  
+            value={input}
+            placeholder="Write a note..."
+            onChange={(e) => {setInput(e.target.value)}}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
+          />
 
-      <button
-        onClick={addNote}
-      >
-        Add
-      </button>
+          <button
+            onClick={addNote}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+          >
+            Add
+          </button>
+        </div>
 
-      <ul>
-        {notes.map((note, index) => (
-          <li key={index}>{note}</li>
-        ))}
-      </ul>
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <ul className="space-y-3">
+            {notes.map((note, index) => (
+              <li key={index} className="p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-700">
+                {note}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>  
     </div>
   )
 }
