@@ -1,16 +1,24 @@
-# React + Vite
+# Notes App (React + Tailwind CSS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and minimal Notes application built with React that focuses on understanding side effects, state-driven UI, data persistence, and responsive layouts using Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
+- Add new notes
+- Edit existing notes
+- Delete notes
+- Persist notes using browser localStorage
+- Responsive two-column layout on larger screens
+- Mobile-first design with Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Concepts learned and applied
+- Component state management using `useState`
+- Side effects and lifecycle thinking with `useEffect`
+- Separating load effects and save effects
+- Preventing unnecessary or cascading renders
+- Persisting application state with `localStorage`
+- Controlled inputs in React
+- Conditional rendering based on state
+- Updating state immutably using `map` and `filter`
+- State-driven UI (edit vs add modes)
+- Responsive design using Tailwind breakpoints
+- Grid layouts and mobile-first styling with Tailwind CSS
