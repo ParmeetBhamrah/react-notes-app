@@ -4,6 +4,7 @@ function App() {
   const [notes, setNotes] = useState([])
   const [input, setInput] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
   useEffect(() => {
     const storedNotes = localStorage.getItem("notes")
@@ -21,14 +22,24 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(notes))
   }, [notes, isLoaded])
 
-  const addNote = () => {
+  const addOrUpdateNote = () => {
     if (input.trim() === "") return
 
-    const newNote = {
-      id: Date.now(),
-      text: input
+    if (editingId) {
+      setNotes(
+        notes.map(note => (
+          note.id === editingId ? {...note, text: input} : note
+        ))
+      )
+      setEditingId(null)
     }
-    setNotes([...notes, newNote])
+    else {
+      const newNote = {
+        id: Date.now(),
+        text: input
+      }
+      setNotes([...notes, newNote])
+    }
     setInput("")
   }
 
@@ -50,10 +61,10 @@ return (
           />
 
           <button
-            onClick={addNote}
+            onClick={addOrUpdateNote}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
           >
-            Add
+            {editingId ? "Update Note" : "Add"}
           </button>
         </div>
 
@@ -63,12 +74,23 @@ return (
               {notes.map((note) => (
                 <li key={note.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-700">
                   <span>{note.text}</span>
+                  <div className="flex gap-2">
                   <button
               onClick={() => deleteNote(note.id)}
               className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
             >
               Delete
             </button>
+            <button
+              onClick={() => {
+                setEditingId(note.id)
+                setInput(note.text)
+              }}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg"
+            >
+              Edit
+            </button>
+                  </div>
                 </li>
               ))}
             </ul>
