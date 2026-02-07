@@ -12,6 +12,10 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes))
+  }, [notes])
+
   const addNote = () => {
     if (input.trim() === "") return
     setNotes([...notes, input])
